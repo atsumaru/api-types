@@ -1,0 +1,9 @@
+{
+  "name": "@atsumaru/api-types",
+  "version": "1.0.0",
+  "description": "RPGアツマールAPIの型定義です。",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}
