@@ -1,0 +1,16 @@
+// これはテスト用プロジェクト (./test) のためのtsconfig.jsonです。
+{
+  "compilerOptions": {
+    // 親ディレクトリ (@atsumaru/api-types) を型定義依存に追加し、その状態でテストファイルのビルドが通ることを確認します。
+    "types": ["../"],
+
+    // テスト目的ビルドで成果物ファイルは不要なので、noEmitを指定します。
+    "noEmit": true,
+
+    "target": "esnext",
+    "module": "commonjs",
+    "rootDir": "./",
+    "strict": true,
+    "esModuleInterop": true
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "@atsumaru/api-types",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "RPGアツマールAPIの型定義です。",
   "license": "MIT",
   "publishConfig": {
@@ -10,6 +10,6 @@
     "typescript": "3.2.4"
   },
   "scripts": {
-    "test": "tsc --noemit"
+    "test": "tsc -p ./test"
   }
 }

@@ -11,15 +11,57 @@ RPGアツマールのゲームプレイヤー実行時に参照可能なグロ�
 npm install -D atsumaru/api-types
 ```
 
-次に`tsconfig.json`の`typeRoots`を以下に設定します。`typeRoots`以外の項目は省略して表記しています。
+
+### tsconfig.json に依存を書く場合
+`tsconfig.json`の`types`を以下に設定します。`types`以外の項目は省略して表記しています。
 
 ```json
 {
     "compilerOptions": {
-        "typeRoots": ["node_modules/@types", "node_modules/@atsumaru/api-types"]
+        "types": ["@atsumaru/api-types"]
     }
 }
 ```
+
+こうすることで、プロジェクト中で `window.RPGAtsumaru` の型定義を利用することができるようになります。
+
+```ts
+if (window.RPGAtsumaru) {
+  ...
+}
+```
+
+
+### ファイル中で import を行う場合
+
+または、以下のように、コード中から直接依存することもできます。
+
+```ts
+import "@atsumaru/api-types";
+
+if (window.RPGAtsumaru) {
+  ...
+}
+```
+
+### 内部の型の利用する場合
+
+以下のようにすることでRPGアツマールが内部で利用している型を使うこともできます。
+
+```ts
+import AtsumaruTypes from "@atsumaru/api-types";
+
+const record = AtsumaruTypes.ScoreRecord = ...;
+```
+
+または
+
+```ts
+import { ScoreRecord } from "@atsumaru/api-types";
+
+const record = ScoreRecord = ...;
+```
+
 
 ## テストについて
 
