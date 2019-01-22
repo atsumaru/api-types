@@ -3,83 +3,86 @@ interface AtsumaruApiError extends Error {
     readonly code: string
 }
 
-interface StorageItem {
-    key: string
-    value: string
-}
+module AtumaruType{
 
-interface ScoreRecord {
-    rank: number
-    userName: string
-    score: number
-}
+    interface StorageItem {
+        key: string
+        value: string
+    }
 
-interface MyScoreRecord {
-    rank: number
-    score: number
-    isNewRecord: boolean
-}
+    interface ScoreRecord {
+        rank: number
+        userName: string
+        score: number
+    }
 
-interface ScoreboardData {
-    ranking: ScoreRecord[]
-    myRecord: MyScoreRecord | null
-    myBestRecord: ScoreRecord | null
-    boardId: number
-    boardName: string
-}
+    interface MyScoreRecord {
+        rank: number
+        score: number
+        isNewRecord: boolean
+    }
 
-interface GlobalServerVariable {
-    value: number
-    maxValue: number
-    minValue: number
-    name: string
-}
+    interface ScoreboardData {
+        ranking: ScoreRecord[]
+        myRecord: MyScoreRecord | null
+        myBestRecord: ScoreRecord | null
+        boardId: number
+        boardName: string
+    }
 
-interface SharedSaveItems {
-    [userId: number]: string
-}
+    interface GlobalServerVariable {
+        value: number
+        maxValue: number
+        minValue: number
+        name: string
+    }
 
-interface UserInformation {
-    id: number
-    name: string
-    profile: string
-    twitterId: string
-    url: string
-}
+    interface SharedSaveItems {
+        [userId: number]: string
+    }
 
-interface SelfInformation extends UserInformation {
-    isPremium: boolean
-}
+    interface UserInformation {
+        id: number
+        name: string
+        profile: string
+        twitterId: string
+        url: string
+    }
 
-interface UserIdName {
-    id: number
-    name: string
-}
+    interface SelfInformation extends UserInformation {
+        isPremium: boolean
+    }
 
-interface UserSignal {
-    id: number
-    senderId: number
-    senderName: string
-    data: string
-    createdAt: number
-}
+    interface UserIdName {
+        id: number
+        name: string
+    }
 
-interface GlobalSignal {
-    id: number
-    senderId: number
-    senderName: string
-    data: string
-    createdAt: number
-}
+    interface UserSignal {
+        id: number
+        senderId: number
+        senderName: string
+        data: string
+        createdAt: number
+    }
 
-interface CommentItem {
-    command: string
-    comment: string
-}
+    interface GlobalSignal {
+        id: number
+        senderId: number
+        senderName: string
+        data: string
+        createdAt: number
+    }
 
-interface InputInfo {
-    type: string
-    key: string
+    interface CommentItem {
+        command: string
+        comment: string
+    }
+
+    interface InputInfo {
+        type: string
+        key: string
+    }
 }
 
 type NextFunc<T> = ((value: T) => void)
@@ -105,7 +108,7 @@ interface Experimental {
         [key: string]: string
     }
     storage?: {
-        getSharedItems?(userIds: number[], gameId?: number): Promise<SharedSaveItems>
+        getSharedItems?(userIds: number[], gameId?: number): Promise<AtumaruType.SharedSaveItems>
     }
     popups?: {
         openLink?(url: string): Promise<void>
@@ -114,7 +117,7 @@ interface Experimental {
     scoreboards?: {
         setRecord?(boardId: number, score: number): Promise<void>
         display?(boardId: number): Promise<void>
-        getRecords?(boardId: number): Promise<ScoreboardData>
+        getRecords?(boardId: number): Promise<AtumaruType.ScoreboardData>
     }
     screenshot?: {
         displayModal?(): Promise<void>
@@ -122,7 +125,7 @@ interface Experimental {
     }
     globalServerVariable?: {
         triggerCall?(triggerId: number, delta?: number): Promise<void>
-        getGlobalServerVariable?(globalServerVariableId: number): Promise<GlobalServerVariable>
+        getGlobalServerVariable?(globalServerVariableId: number): Promise<AtumaruType.GlobalServerVariable>
     }
     interplayer?: {
         enable?(): Promise<void>
@@ -159,8 +162,8 @@ interface RPGAtsumaruApi {
         pushContextFactor(factor: string): void
         pushMinorContext(): void
         setContext(context: string): void
-        cameOut: Subject<CommentItem[]>
-        posted: Subject<CommentItem>
+        cameOut: Subject<AtumaruType.CommentItem[]>
+        posted: Subject<AtumaruType.CommentItem>
         verbose: boolean
     }
     controllers: {
