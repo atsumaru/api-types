@@ -3,7 +3,7 @@ interface AtsumaruApiError extends Error {
     readonly code: string
 }
 
-module AtumaruType{
+declare module "@atsumaru/api-types" {
 
     interface StorageItem {
         key: string
