@@ -1,4 +1,6 @@
-// このテストファイルではアツマールの型定義を利用したコードを記述し、それが正しくビルドできるかのみを確認しています
+// このテストファイルではRPGアツマールの型定義を利用したコードを記述し、それが正しくビルドできるかのみを確認しています
+
+import AtsumaruTypes from "@atsumaru/api-types";
 
 (async () => {
   let str: string, num: number, bool: boolean;
@@ -21,13 +23,13 @@
   window.RPGAtsumaru.comment.pushContextFactor("one factor");
   window.RPGAtsumaru.comment.pushMinorContext();
   window.RPGAtsumaru.comment.setContext("one context");
-  window.RPGAtsumaru.comment.cameOut.subscribe((commentItems: CommentItem[]) => {
+  window.RPGAtsumaru.comment.cameOut.subscribe((commentItems: AtsumaruTypes.CommentItem[]) => {
     commentItems.forEach(item => {
       str = item.comment;
       str = item.command;
     });
   });
-  window.RPGAtsumaru.comment.posted.subscribe((item: CommentItem) => {
+  window.RPGAtsumaru.comment.posted.subscribe((item: AtsumaruTypes.CommentItem) => {
     str = item.comment;
     str = item.command;
   });
