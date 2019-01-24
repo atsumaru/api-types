@@ -1,9 +1,9 @@
+
 interface AtsumaruApiError extends Error {
     readonly errorType: string
     readonly code: string
 }
-
-declare module "@atsumaru/api-types" {
+declare module AtsumaruTypes{
 
     interface StorageItem {
         key: string
@@ -84,7 +84,6 @@ declare module "@atsumaru/api-types" {
         key: string
     }
 }
-
 type NextFunc<T> = ((value: T) => void)
 type ErrorFunc = (errorValue: any) => void;
 
@@ -108,7 +107,7 @@ interface Experimental {
         [key: string]: string
     }
     storage?: {
-        getSharedItems?(userIds: number[], gameId?: number): Promise<AtumaruType.SharedSaveItems>
+        getSharedItems?(userIds: number[], gameId?: number): Promise<AtsumaruTypes.SharedSaveItems>
     }
     popups?: {
         openLink?(url: string): Promise<void>
@@ -117,7 +116,7 @@ interface Experimental {
     scoreboards?: {
         setRecord?(boardId: number, score: number): Promise<void>
         display?(boardId: number): Promise<void>
-        getRecords?(boardId: number): Promise<AtumaruType.ScoreboardData>
+        getRecords?(boardId: number): Promise<AtsumaruTypes.ScoreboardData>
     }
     screenshot?: {
         displayModal?(): Promise<void>
@@ -125,20 +124,20 @@ interface Experimental {
     }
     globalServerVariable?: {
         triggerCall?(triggerId: number, delta?: number): Promise<void>
-        getGlobalServerVariable?(globalServerVariableId: number): Promise<AtumaruType.GlobalServerVariable>
+        getGlobalServerVariable?(globalServerVariableId: number): Promise<AtsumaruTypes.GlobalServerVariable>
     }
     interplayer?: {
         enable?(): Promise<void>
     }
     user?: {
-        getUserInformation?(userId: number): Promise<UserInformation>
-        getSelfInformation?(): Promise<SelfInformation>
-        getRecentUsers?(): Promise<UserIdName[]>
+        getUserInformation?(userId: number): Promise<AtsumaruTypes.UserInformation>
+        getSelfInformation?(): Promise<AtsumaruTypes.SelfInformation>
+        getRecentUsers?(): Promise<AtsumaruTypes.UserIdName[]>
     }
     signal?: {
-        getUserSignals?(): Promise<UserSignal[]>
+        getUserSignals?(): Promise<AtsumaruTypes.UserSignal[]>
         sendSignalToUser?(receiverId: number, data: string): Promise<void>
-        getGlobalSignals?(): Promise<GlobalSignal[]>
+        getGlobalSignals?(): Promise<AtsumaruTypes.GlobalSignal[]>
         sendSignalToGlobal?(data: string): Promise<void>
     }
     channel?: {
@@ -149,8 +148,8 @@ interface Experimental {
 interface RPGAtsumaruApi {
     experimental?: Experimental
     storage: {
-        getItems(): Promise<StorageItem[]>
-        setItems(items: StorageItem[]): Promise<void>
+        getItems(): Promise<AtsumaruTypes.StorageItem[]>
+        setItems(items: AtsumaruTypes.StorageItem[]): Promise<void>
         removeItem(key: string): Promise<void>
     }
     popups: {
@@ -162,12 +161,12 @@ interface RPGAtsumaruApi {
         pushContextFactor(factor: string): void
         pushMinorContext(): void
         setContext(context: string): void
-        cameOut: Subject<AtumaruType.CommentItem[]>
-        posted: Subject<AtumaruType.CommentItem>
+        cameOut: Subject<AtsumaruTypes.CommentItem[]>
+        posted: Subject<AtsumaruTypes.CommentItem>
         verbose: boolean
     }
     controllers: {
-        defaultController: Subject<InputInfo>
+        defaultController: Subject<AtsumaruTypes.InputInfo>
     }
     volume: {
         getCurrentValue(): number
