@@ -11,8 +11,8 @@ RPGアツマールのゲームプレイヤー実行時に参照可能なグロ�
 npm install -D atsumaru/api-types
 ```
 
-
 ### tsconfig.json に依存を書く場合
+
 `tsconfig.json`の`types`を以下に設定します。`types`以外の項目は省略して表記しています。
 
 ```json
@@ -30,7 +30,6 @@ if (window.RPGAtsumaru) {
   ...
 }
 ```
-
 
 ### ファイル中で import を行う場合
 
@@ -61,7 +60,6 @@ import { ScoreRecord } from "@atsumaru/api-types";
 
 const record = ScoreRecord = ...;
 ```
-
 
 ## テストについて
 
