@@ -14,6 +14,7 @@ declare module "@atsumaru/api-types" {
   interface ScoreRecord {
     rank: number
     userName: string
+    userId: number
     score: number
   }
 
@@ -36,6 +37,22 @@ declare module "@atsumaru/api-types" {
     maxValue: number
     minValue: number
     name: string
+  }
+
+  interface GlobalServerVariableTrigger {
+    triggerId: number
+    triggerType: string
+    memo: string | null
+    argument1: string | null
+    argument2: string | null
+    argument3: string | null
+    argument4: string | null
+    argument5: string | null
+  }
+
+  interface GlobalServerVariableDefinition extends GlobalServerVariable {
+    globalServerVariableId: number
+    triggers: GlobalServerVariableTrigger[]
   }
 
   interface SharedSaveItems {
@@ -80,6 +97,10 @@ declare module "@atsumaru/api-types" {
     comment: string
   }
 
+  interface SceneComment extends CommentItem {
+    context: string
+  }
+
   interface InputInfo {
     type: string
     key: string
@@ -110,6 +131,9 @@ declare module "@atsumaru/api-types" {
     storage?: {
       getSharedItems?(userIds: number[], gameId?: number): Promise<SharedSaveItems>
     }
+    comment?: {
+      getSceneComments?(sceneName: string): Promise<SceneComment[]>
+    }
     popups?: {
       openLink?(url: string): Promise<void>
       displayCreatorInformationModal?(niconicoUserId?: number): Promise<void>
@@ -126,6 +150,7 @@ declare module "@atsumaru/api-types" {
     globalServerVariable?: {
       triggerCall?(triggerId: number, delta?: number): Promise<void>
       getGlobalServerVariable?(globalServerVariableId: number): Promise<GlobalServerVariable>
+      getAllGlobalServerVariables?(): Promise<GlobalServerVariableDefinition[]>
     }
     interplayer?: {
       enable?(): Promise<void>
