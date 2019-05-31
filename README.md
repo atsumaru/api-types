@@ -8,7 +8,7 @@ RPGアツマールのゲームプレイヤー実行時に参照可能なグロ�
 実行にはnpm([https://www.npmjs.com/](https://www.npmjs.com/))が必要です。
 
 ```bash
-npm install -D atsumaru/api-types
+npm install -D atsumaru/api-types#master
 ```
 
 ### tsconfig.json に依存を書く場合
