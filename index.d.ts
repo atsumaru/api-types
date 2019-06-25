@@ -10,7 +10,7 @@ declare module "@atsumaru/api-types" {
     key: string
     value: string
   }
-  
+
   interface TweetSettings {
     tweetText?: string;
     param1?: string;
@@ -46,7 +46,7 @@ declare module "@atsumaru/api-types" {
   }
 
   interface GlobalServerVariable {
-    value: number
+    value: number | string;
     maxValue: number
     minValue: number
     name: string
@@ -55,6 +55,7 @@ declare module "@atsumaru/api-types" {
   interface GlobalServerVariableTrigger {
     triggerId: number
     triggerType: string
+    triggerName: string | null
     memo: string | null
     argument1: string | null
     argument2: string | null
@@ -162,8 +163,10 @@ declare module "@atsumaru/api-types" {
       setTweetMessage?(tweetSettings: TweetSettings | null): void
     }
     globalServerVariable?: {
-      triggerCall?(triggerId: number, delta?: number): Promise<void>
+      triggerCall?(triggerId: number, value?: number | string): Promise<void>
+      triggerCallByName?(globalServerVariableName: string, triggerName: string, value?: number | string): Promise<void>
       getGlobalServerVariable?(globalServerVariableId: number): Promise<GlobalServerVariable>
+      getGlobalServerVariableByName?(globalServerVariableName: string): Promise<GlobalServerVariable>
       getAllGlobalServerVariables?(): Promise<GlobalServerVariableDefinition[]>
     }
     interplayer?: {

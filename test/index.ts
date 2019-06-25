@@ -3,7 +3,7 @@
 import AtsumaruTypes from "@atsumaru/api-types";
 
 (async () => {
-  let str: string, num: number, bool: boolean;
+  let str: string, num: number, bool: boolean, numOrStr: number | string;
 
   if (!window.RPGAtsumaru) {
     return;
@@ -121,7 +121,15 @@ import AtsumaruTypes from "@atsumaru/api-types";
   if (window.RPGAtsumaru.experimental.globalServerVariable) {
     if (window.RPGAtsumaru.experimental.globalServerVariable.getGlobalServerVariable) {
       const result = await window.RPGAtsumaru.experimental.globalServerVariable.getGlobalServerVariable(123);
-      num = result.value;
+      numOrStr = result.value;
+      str = result.name;
+      num = result.maxValue;
+      num = result.minValue;
+    }
+
+    if (window.RPGAtsumaru.experimental.globalServerVariable.getGlobalServerVariableByName) {
+      const result = await window.RPGAtsumaru.experimental.globalServerVariable.getGlobalServerVariableByName("変数1");
+      numOrStr = result.value;
       str = result.name;
       num = result.maxValue;
       num = result.minValue;
@@ -130,6 +138,11 @@ import AtsumaruTypes from "@atsumaru/api-types";
     if (window.RPGAtsumaru.experimental.globalServerVariable.triggerCall) {
       await window.RPGAtsumaru.experimental.globalServerVariable.triggerCall(123);
       await window.RPGAtsumaru.experimental.globalServerVariable.triggerCall(123, 456);
+    }
+
+    if (window.RPGAtsumaru.experimental.globalServerVariable.triggerCallByName) {
+      await window.RPGAtsumaru.experimental.globalServerVariable.triggerCallByName("変数1", "トリガー1");
+      await window.RPGAtsumaru.experimental.globalServerVariable.triggerCallByName("変数1", "トリガー1", 456);
     }
   }
 
