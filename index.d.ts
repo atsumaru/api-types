@@ -196,7 +196,7 @@ declare module "@atsumaru/api-types" {
       removeItem(key: string): Promise<void>
     }
     popups: {
-      openLink(url: string): Promise<void>
+      openLink(url: string, comment?: string): Promise<void>
     }
     comment: {
       changeScene(sceneName: string): void
