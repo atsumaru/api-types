@@ -176,6 +176,7 @@ declare module "@atsumaru/api-types" {
       getUserInformation?(userId: number): Promise<UserInformation>
       getSelfInformation?(): Promise<SelfInformation>
       getRecentUsers?(): Promise<UserIdName[]>
+      getActiveUserCount?(minutes: number): Promise<number>
     }
     signal?: {
       getUserSignals?(): Promise<UserSignal[]>
