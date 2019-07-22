@@ -120,6 +120,30 @@ declare module "@atsumaru/api-types" {
     key: string
   }
 
+  interface NicoadPoints {
+    totalPoint: number;
+    activePoint: number;
+  }
+
+  interface NicoadHistories {
+    remainingCount: number;
+    serverTime: number;
+    histories: {
+        advertiserName: string;
+        nicoadId: number;
+        adPoint: number;
+        contribution: number;
+        startedAt: number;
+        endedAt: number;
+    }[];
+  }
+
+  type NicoadRanking = {
+    advertiserName: string;
+    totalContribution: number;
+    rank: number;
+  }[]
+
   type NextFunc<T> = ((value: T) => void)
   type ErrorFunc = (errorValue: any) => void;
 
@@ -186,6 +210,11 @@ declare module "@atsumaru/api-types" {
     }
     channel?: {
       hasPermission?(channelId: number): Promise<boolean>
+    }
+    nicoad?: {
+      getPoints?(): Promise<NicoadPoints>
+      getHistories?(offsetAdId?: number): Promise<NicoadHistories>
+      getRanking?(): Promise<NicoadRanking>
     }
   }
 
