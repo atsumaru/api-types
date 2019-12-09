@@ -11,6 +11,10 @@ declare module "@atsumaru/api-types" {
     value: string
   }
 
+  interface ScreenshotModalResults {
+    tweeted: boolean
+  }
+
   interface TweetSettings {
     tweetText?: string;
     param1?: string;
@@ -182,7 +186,7 @@ declare module "@atsumaru/api-types" {
       getRecords?(boardId: number): Promise<ScoreboardData>
     }
     screenshot?: {
-      displayModal?(): Promise<void>
+      displayModal?(): Promise<ScreenshotModalResults>
       setScreenshotHandler?(handler: () => (Promise<string> | string)): void
       setTweetMessage?(tweetSettings: TweetSettings | null): void
     }
