@@ -166,71 +166,19 @@ declare module "@atsumaru/api-types" {
     error: ErrorFunc
   }
 
-  interface Experimental {
-    query?: {
+  interface RPGAtsumaruApi {
+    query: {
       [key: string]: string
     }
-    storage?: {
-      getSharedItems?(userIds: number[], gameId?: number): Promise<SharedSaveItems>
-    }
-    comment?: {
-      getSceneComments?(sceneName: string): Promise<SceneComment[]>
-    }
-    popups?: {
-      openLink?(url: string): Promise<void>
-      displayCreatorInformationModal?(niconicoUserId?: number): Promise<void>
-    }
-    scoreboards?: {
-      setRecord?(boardId: number, score: number): Promise<void>
-      display?(boardId: number): Promise<void>
-      getRecords?(boardId: number): Promise<ScoreboardData>
-    }
-    screenshot?: {
-      displayModal?(): Promise<ScreenshotModalResults>
-      setScreenshotHandler?(handler: () => (Promise<string> | string)): void
-      setTweetMessage?(tweetSettings: TweetSettings | null): void
-    }
-    globalServerVariable?: {
-      triggerCall?(triggerId: number, value?: number | string): Promise<void>
-      triggerCallByName?(globalServerVariableName: string, triggerName: string, value?: number | string): Promise<void>
-      getGlobalServerVariable?(globalServerVariableId: number): Promise<GlobalServerVariable>
-      getGlobalServerVariableByName?(globalServerVariableName: string): Promise<GlobalServerVariable>
-      getAllGlobalServerVariables?(): Promise<GlobalServerVariableDefinition[]>
-    }
-    interplayer?: {
-      enable?(): Promise<void>
-    }
-    user?: {
-      getUserInformation?(userId: number): Promise<UserInformation>
-      getSelfInformation?(): Promise<SelfInformation>
-      getRecentUsers?(): Promise<UserIdName[]>
-      getActiveUserCount?(minutes: number): Promise<number>
-    }
-    signal?: {
-      getUserSignals?(): Promise<UserSignal[]>
-      sendSignalToUser?(receiverId: number, data: string): Promise<void>
-      getGlobalSignals?(): Promise<GlobalSignal[]>
-      sendSignalToGlobal?(data: string): Promise<void>
-    }
-    channel?: {
-      hasPermission?(channelId: number): Promise<boolean>
-    }
-    nicoad?: {
-      getPoints?(): Promise<NicoadPoints>
-      getHistories?(offsetAdId?: number): Promise<NicoadHistories>
-      getRanking?(): Promise<NicoadRanking>
-    }
-  }
-
-  interface RPGAtsumaruApi {
-    experimental?: Experimental
     storage: {
       getItems(): Promise<StorageItem[]>
       setItems(items: StorageItem[]): Promise<void>
       removeItem(key: string): Promise<void>
+      getSharedItems(userIds: number[], gameId?: number): Promise<SharedSaveItems>
     }
     popups: {
       openLink(url: string, comment?: string): Promise<void>
+      displayCreatorInformationModal(niconicoUserId?: number): Promise<void>
     }
     comment: {
       changeScene(sceneName: string): void
@@ -241,6 +189,7 @@ declare module "@atsumaru/api-types" {
       cameOut: Subject<CommentItem[]>
       posted: Subject<CommentItem>
       verbose: boolean
+      getSceneComments(sceneName: string): Promise<SceneComment[]>
     }
     controllers: {
       defaultController: Subject<InputInfo>
@@ -249,6 +198,45 @@ declare module "@atsumaru/api-types" {
       getCurrentValue(): number
       changed(): Subject<number>
     }
+    scoreboards: {
+      setRecord(boardId: number, score: number): Promise<void>
+      display(boardId: number): Promise<void>
+      getRecords(boardId: number): Promise<ScoreboardData>
+    }
+    screenshot: {
+      displayModal(): Promise<ScreenshotModalResults>
+      setScreenshotHandler(handler: () => (Promise<string> | string)): void
+      setTweetMessage(tweetSettings: TweetSettings | null): void
+    }
+    globalServerVariable: {
+      triggerCall(triggerId: number, value?: number | string): Promise<void>
+      triggerCallByName(globalServerVariableName: string, triggerName: string, value?: number | string): Promise<void>
+      getGlobalServerVariable(globalServerVariableId: number): Promise<GlobalServerVariable>
+      getGlobalServerVariableByName(globalServerVariableName: string): Promise<GlobalServerVariable>
+      getAllGlobalServerVariables(): Promise<GlobalServerVariableDefinition[]>
+    }
+    interplayer: {
+      enable(): Promise<void>
+    }
+    user: {
+      getUserInformation(userId: number): Promise<UserInformation>
+      getSelfInformation(): Promise<SelfInformation>
+      getRecentUsers(): Promise<UserIdName[]>
+      getActiveUserCount(minutes: number): Promise<number>
+    }
+    signal: {
+      getUserSignals(): Promise<UserSignal[]>
+      sendSignalToUser(receiverId: number, data: string): Promise<void>
+      getGlobalSignals(): Promise<GlobalSignal[]>
+      sendSignalToGlobal(data: string): Promise<void>
+    }
+    channel: {
+      hasPermission(channelId: number): Promise<boolean>
+    }
+    nicoad: {
+      getPoints(): Promise<NicoadPoints>
+      getHistories(offsetAdId?: number): Promise<NicoadHistories>
+      getRanking(): Promise<NicoadRanking>
+    }
   }
-
 }
