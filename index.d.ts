@@ -148,6 +148,26 @@ declare module "@atsumaru/api-types" {
     rank: number;
   }[]
 
+  type GiftMyPoints = {
+    [itemCode: string]: number;
+  }
+
+  type GiftHistories = {
+    sceneName: string;
+    context: string;
+    userName: string;
+    point: number;
+    comment: string;
+    reply: string;
+    thanks: boolean;
+    createdAt: number;
+  }[]
+
+  type GiftRanking = {
+    userName: string;
+    point: number;
+  }[]
+
   type NextFunc<T> = ((value: T) => void)
   type ErrorFunc = (errorValue: any) => void;
 
@@ -237,6 +257,13 @@ declare module "@atsumaru/api-types" {
       getPoints(): Promise<NicoadPoints>
       getHistories(offsetAdId?: number): Promise<NicoadHistories>
       getRanking(): Promise<NicoadRanking>
+    }
+    gift: {
+      displayCatalogModal: () => void;
+      getTotalPoints: () => Promise<number>;
+      getMyPoints: () => Promise<GiftMyPoints>;
+      getHistories: () => Promise<GiftHistories>;
+      getRanking: () => Promise<GiftRanking>;
     }
   }
 }
