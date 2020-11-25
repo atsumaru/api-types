@@ -110,14 +110,38 @@ declare module "@atsumaru/api-types" {
     createdAt: number
   }
 
-  interface CommentItem {
+  type CameoutComments = ({
+    type: "comment"
     command: string
     comment: string
+    createdAt: number
+  } | {
+    type: "gift"
+    command: string
+    comment: string
+    createdAt: number
+    userName: string
+    point: number
+    thanks: boolean
+    reply: string
+  })[]
+
+  type PostedComment = {
+    type: "comment"
+    command: string
+    comment: string
+  } | {
+    type: "gift"
+    command: string
+    comment: string
+    point: number
   }
 
-  interface SceneComment extends CommentItem {
+  type SceneComments = {
+    command: string
+    comment: string
     context: string
-  }
+  }[]
 
   interface InputInfo {
     type: string
@@ -206,10 +230,11 @@ declare module "@atsumaru/api-types" {
       pushContextFactor(factor: string): void
       pushMinorContext(): void
       setContext(context: string): void
-      cameOut: Subject<CommentItem[]>
-      posted: Subject<CommentItem>
+      cameOut: Subject<CameoutComments>
+      posted: Subject<PostedComment>
       verbose: boolean
-      getSceneComments(sceneName: string): Promise<SceneComment[]>
+      getSceneComments(sceneName: string): Promise<SceneComments>
+      changeAutoGposMode(mode: string): void
     }
     controllers: {
       defaultController: Subject<InputInfo>
