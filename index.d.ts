@@ -15,6 +15,16 @@ declare module "@atsumaru/api-types" {
     tweeted: boolean
   }
 
+  interface ThanksSettings {
+    autoThanks?: boolean;
+    thanksText?: string;
+    thanksImage?: string;
+    clapThanksText?: string;
+    clapThanksImage?: string;
+    giftThanksText?: string;
+    giftThanksImage?: string;
+  }
+
   interface TweetSettings {
     tweetText?: string;
     param1?: string;
@@ -223,6 +233,8 @@ declare module "@atsumaru/api-types" {
     popups: {
       openLink(url: string, comment?: string): Promise<void>
       displayCreatorInformationModal(niconicoUserId?: number): Promise<void>
+      displayThanksModal(message?: string): Promise<void>
+      setThanksSettings(thanksSettings: ThanksSettings): void
     }
     comment: {
       changeScene(sceneName: string): void
