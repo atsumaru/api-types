@@ -233,7 +233,7 @@ declare module "@atsumaru/api-types" {
     popups: {
       openLink(url: string, comment?: string): Promise<void>
       displayCreatorInformationModal(niconicoUserId?: number): Promise<void>
-      displayThanksModal(message?: string): Promise<void>
+      displayThanksModal(): Promise<void>
       setThanksSettings(thanksSettings: ThanksSettings): void
     }
     comment: {
