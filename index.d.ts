@@ -302,5 +302,8 @@ declare module "@atsumaru/api-types" {
       getHistories: () => Promise<GiftHistories>;
       getRanking: () => Promise<GiftRanking>;
     }
+    time: {
+      getServerTime: () => number;
+    }
   }
 }
